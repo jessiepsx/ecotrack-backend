@@ -1,0 +1,6 @@
+CREATE TABLE USUARIO (
+                         ID_USUARIO NUMBER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                         NOME VARCHAR2(100) NOT NULL,
+                         EMAIL VARCHAR2(100) NOT NULL UNIQUE,
+                         SENHA VARCHAR2(100) NOT NULL
+);
