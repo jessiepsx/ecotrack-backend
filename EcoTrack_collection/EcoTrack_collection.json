@@ -1,0 +1,350 @@
+{
+  "info": {
+    "_postman_id": "ecotrack-collection-v1",
+    "name": "EcoTrack API",
+    "description": "Collection completa dos endpoints da EcoTrack API — Sistema ESG de Ações Sustentáveis.\n\nAutenticação: HTTP Basic Auth (email + senha).\n\nVariáveis de ambiente:\n- {{base_url}}  → http://localhost:8080\n- {{auth_email}} → usuario@ecotrack.com\n- {{auth_senha}} → senha123",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url",    "value": "http://localhost:8080", "type": "string" },
+    { "key": "auth_email",  "value": "admin@ecotrack.com",    "type": "string" },
+    { "key": "auth_senha",  "value": "Admin@1234",            "type": "string" },
+    { "key": "usuario_id",  "value": "1",                     "type": "string" },
+    { "key": "acao_id",     "value": "1",                     "type": "string" },
+    { "key": "dica_id",     "value": "1",                     "type": "string" }
+  ],
+  "item": [
+
+    {
+      "name": "👤 Usuários",
+      "item": [
+
+        {
+          "name": "POST /usuarios — Criar usuário (público)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/usuarios", "host": ["{{base_url}}"], "path": ["usuarios"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Silva\",\n  \"email\": \"ana@ecotrack.com\",\n  \"senha\": \"Senha@2024\",\n  \"role\": \"ROLE_USER\"\n}"
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /usuarios — Listar todos (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/usuarios", "host": ["{{base_url}}"], "path": ["usuarios"] }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /usuarios/:id — Buscar por ID (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/usuarios/{{usuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios", "{{usuario_id}}"]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "PUT /usuarios/:id — Atualizar usuário (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{base_url}}/usuarios/{{usuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios", "{{usuario_id}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Ana Silva Atualizada\",\n  \"email\": \"ana.nova@ecotrack.com\"\n}"
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "DELETE /usuarios/:id — Remover usuário (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/usuarios/{{usuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["usuarios", "{{usuario_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+
+    {
+      "name": "🌱 Ações Sustentáveis",
+      "item": [
+
+        {
+          "name": "POST /acoes-sustentaveis — Criar ação (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": { "raw": "{{base_url}}/acoes-sustentaveis", "host": ["{{base_url}}"], "path": ["acoes-sustentaveis"] },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Redução de plástico descartável\",\n  \"descricao\": \"Substituir copos plásticos por reutilizáveis no escritório\",\n  \"categoria\": \"RESIDUOS\",\n  \"impactoEstimadoKgCO2\": 12.5,\n  \"dataInicio\": \"2024-06-01\",\n  \"dataFim\": \"2024-12-31\"\n}"
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /acoes-sustentaveis — Listar todas (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/acoes-sustentaveis", "host": ["{{base_url}}"], "path": ["acoes-sustentaveis"] }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /acoes-sustentaveis/:id — Buscar por ID (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/acoes-sustentaveis/{{acao_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["acoes-sustentaveis", "{{acao_id}}"]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /acoes-sustentaveis/usuario/:id — Por usuário (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/acoes-sustentaveis/usuario/{{usuario_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["acoes-sustentaveis", "usuario", "{{usuario_id}}"]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "PUT /acoes-sustentaveis/:id — Atualizar ação (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "url": {
+              "raw": "{{base_url}}/acoes-sustentaveis/{{acao_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["acoes-sustentaveis", "{{acao_id}}"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Redução de plástico — Fase 2\",\n  \"descricao\": \"Expandir para toda a empresa\",\n  \"categoria\": \"RESIDUOS\",\n  \"impactoEstimadoKgCO2\": 45.0,\n  \"dataInicio\": \"2024-06-01\",\n  \"dataFim\": \"2025-06-01\"\n}"
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "DELETE /acoes-sustentaveis/:id — Remover ação (autenticado)",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "{{auth_email}}" },
+                { "key": "password", "value": "{{auth_senha}}" }
+              ]
+            },
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/acoes-sustentaveis/{{acao_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["acoes-sustentaveis", "{{acao_id}}"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+
+    {
+      "name": "💡 Dicas ESG",
+      "item": [
+
+        {
+          "name": "GET /dicas-esg — Listar todas (público)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/dicas-esg", "host": ["{{base_url}}"], "path": ["dicas-esg"] }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /dicas-esg/:id — Buscar por ID (público)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/dicas-esg/{{dica_id}}",
+              "host": ["{{base_url}}"],
+              "path": ["dicas-esg", "{{dica_id}}"]
+            }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /dicas-esg?categoria=ENERGIA — Filtrar por categoria (público)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/dicas-esg?categoria=ENERGIA",
+              "host": ["{{base_url}}"],
+              "path": ["dicas-esg"],
+              "query": [{ "key": "categoria", "value": "ENERGIA" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+
+    {
+      "name": "🌤️ Clima",
+      "item": [
+
+        {
+          "name": "GET /clima?cidade=SaoPaulo — Consultar clima (público)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/clima?cidade=SaoPaulo",
+              "host": ["{{base_url}}"],
+              "path": ["clima"],
+              "query": [{ "key": "cidade", "value": "SaoPaulo" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+
+    {
+      "name": "🔒 Auth / Health",
+      "item": [
+
+        {
+          "name": "GET /actuator/health — Health Check (público)",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/actuator/health", "host": ["{{base_url}}"], "path": ["actuator","health"] }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /usuarios — Teste 401 sem credenciais",
+          "request": {
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/usuarios", "host": ["{{base_url}}"], "path": ["usuarios"] }
+          },
+          "response": []
+        },
+
+        {
+          "name": "GET /usuarios — Teste 401 credenciais erradas",
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                { "key": "username", "value": "errado@ecotrack.com" },
+                { "key": "password", "value": "senhaerrada" }
+              ]
+            },
+            "method": "GET",
+            "url": { "raw": "{{base_url}}/usuarios", "host": ["{{base_url}}"], "path": ["usuarios"] }
+          },
+          "response": []
+        }
+      ]
+    }
+
+  ]
+}
